@@ -1,10 +1,6 @@
 import csv     # imports the csv module
 import sys      # imports the sys module
-
-n=input("Enter the file name without '.csv ': ")
-f = open(n+'.csv', 'rb') # opens the csv file
-lines = (line.decode('utf-8') for line in f)
-
+from collections import Counter
 
 def getIndex(s,a):
     for each in a:
@@ -20,9 +16,9 @@ def getCol(data,index):
     #col = []
     for i in range(len(data)):
         #col.append(data[i][index])
-        f.write(data[i][index]+'\n') # python will convert \n to os.linesep
+        f.write(data[i][index]+'\n') 
     f.close()
-        #print(data[i][index])
+    #getCount(col)
     print("Saved as: "+filename)
     #return col
 
@@ -41,7 +37,16 @@ def preprocess(lines_list):
             lines_list = lines_list[:i]
             break
     return lines_list
-        
+
+def getCount(array):
+    ctr = Counter(array)
+    for key,value in ctr.items():
+        print(str(key)+" => "+str(value))        
+
+
+n=input("Enter the file name without '.csv ': ")
+f = open(n+'.csv', 'rb') # opens the csv file
+lines = (line.decode('utf-8') for line in f)
 
 allLines = list(csv.reader(lines))
 l1 = list(allLines[0]) #line
@@ -53,6 +58,5 @@ for i in range(header_length):
     print(str(i+1)+" -> "+l1[i])
 while(True):
     run()
-
 
 
